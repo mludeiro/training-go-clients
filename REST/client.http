@@ -30,6 +30,5 @@ DELETE http://localhost:5000/clients/3
 POST http://localhost:5000/clients
 
   {
-    "Name": "Smoking Pant",
-    "HasDebt": false
+    "Name": "Smoking Pant"
   }
