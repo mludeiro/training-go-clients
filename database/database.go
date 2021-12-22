@@ -22,9 +22,9 @@ func (db *Database) Migrate() *Database {
 }
 
 func (db *Database) CreateSampleData() *Database {
-	carlos := entity.Client{Name: "Carlos", HasDebt: false}
-	laura := entity.Client{Name: "Laura", HasDebt: false}
-	pedro := entity.Client{Name: "Pedro", HasDebt: false}
+	carlos := entity.Client{Name: "Carlos"}
+	laura := entity.Client{Name: "Laura"}
+	pedro := entity.Client{Name: "Pedro"}
 
 	db.GetDB().Create(&carlos).Create(&laura).Create(&pedro)
 
