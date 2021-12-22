@@ -3,7 +3,7 @@ package entity
 type Client struct {
 	ID      uint   `gorm:"primarykey"`
 	Name    string `gorm:"not null;default:null"`
-	HasDebt bool   ``
+	HasDebt bool   `gorm:"-"`
 }
 
 type ClientResultSet struct {
