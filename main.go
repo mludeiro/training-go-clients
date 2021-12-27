@@ -11,8 +11,8 @@ func main() {
 	cont := container.NewContainer()
 
 	cont.DataBase.InitializeMySQL().Migrate().CreateSampleData()
-	// cont.DataBase.InitializeSqlite().Migrate().CreateSampleData()
-	// 	cont.DataBase.InitializePostgress().Migrate().CreateSampleData()
+	// cont.DataBase.InitializeSqlite().Migrate().CreateSampleData() 
+  // cont.DataBase.InitializePostgress().Migrate().CreateSampleData()
 
 	go cont.WebServer.CreateServer()
 

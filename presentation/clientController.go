@@ -97,7 +97,7 @@ func (this *ClientController) PostClient(rw http.ResponseWriter, r *http.Request
 	str, err := json.Marshal(*dto)
 
 	if err == nil {
-		rw.WriteHeader(http.StatusOK)
+		rw.WriteHeader(http.StatusOK) 
 		rw.Write(str)
 	} else {
 		rw.WriteHeader(http.StatusInternalServerError)
