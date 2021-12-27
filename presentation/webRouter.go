@@ -18,11 +18,12 @@ func (this *WebRouter) GetRouter() *mux.Router {
 
 	sm := mux.NewRouter()
 
-	sm.Methods(http.MethodGet).Path("/clients/{id:[0-9]+}").HandlerFunc(this.ClientController.GetClient)
-	sm.Methods(http.MethodGet).Path("/clients").HandlerFunc(this.ClientController.GetClients)
+	sm.Methods(http.MethodGet).Path("/clients/v1/{id:[0-9]+}").HandlerFunc(this.ClientController.GetClient)
+	sm.Methods(http.MethodGet).Path("/clients/v1").HandlerFunc(this.ClientController.GetClients)
 
-	sm.Methods(http.MethodDelete).Path("/clients/{id:[0-9]+}").HandlerFunc(this.ClientController.DeleteClient)
-	sm.Methods(http.MethodPost).Path("/clients").HandlerFunc(this.ClientController.PostClient)
+	sm.Methods(http.MethodDelete).Path("/clients/v1/{id:[0-9]+}").HandlerFunc(this.ClientController.DeleteClient)
+	sm.Methods(http.MethodPost).Path("/clients/v1").HandlerFunc(this.ClientController.PostClient)
+	sm.Methods(http.MethodPut).Path("/clients/v1").HandlerFunc(this.ClientController.PostClient)
 
 	// Just to log the calls, response code and time spent
 	sm.Use(LogMiddleWare)
