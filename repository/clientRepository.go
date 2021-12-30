@@ -40,7 +40,7 @@ func (this *Client) GetAll(query entity.Query) (entity.ClientResultSet, error) {
 }
 
 func (this *Client) Add(a *entity.Client) (*entity.Client, error) {
-	query := this.DataBase.GetDB().Create(a)
+	query := this.DataBase.GetDB().Save(a)
 	if query.Error != nil {
 		return nil, query.Error
 	}

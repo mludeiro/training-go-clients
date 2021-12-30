@@ -1,34 +1,36 @@
 ### GET ONE
 
-GET http://localhost:5000/clients/1
-### GET ONE With details
-
-GET http://localhost:5000/clients/1?expand=ClientType
+GET http://localhost:5000/api/v1/clients/1
 
 ### GET MANY
 
-GET http://localhost:5000/clients
+GET http://localhost:5000/api/v1/clients
 
 ### GET MANY WITH FILTER
-GET http://localhost:5000/clients?condition=name%20eq%20Tennis
+
+GET http://localhost:5000/api/v1/clients?condition=name%20eq%20Tennis
 
 ### GET MANY WITH ORDERING
 
-GET http://localhost:5000/clients?order=name
-
-
-### GET MANY with details
-
-GET http://localhost:5000/clients?expand=ClientType
+GET http://localhost:5000/api/v1/clients?order=name
 
 ### DELETE
 
-DELETE http://localhost:5000/clients/3
+DELETE http://localhost:5000/api/v1/clients/3
 
 ### CREATE
 
-POST http://localhost:5000/clients
+POST http://localhost:5000/api/v1/clients
 
   {
-    "Name": "Smoking Pant"
+    "Name": "Juan Perez"
+  }
+
+### UPDATE
+
+PUT http://localhost:5000/api/v1/clients
+
+  {
+    "id" : 1,
+    "Name": "Juan Perez"
   }

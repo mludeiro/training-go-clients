@@ -6,6 +6,7 @@ import (
 	"training-go-clients/entity"
 	"training-go-clients/tools"
 
+	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -34,6 +35,18 @@ func (db *Database) CreateSampleData() *Database {
 func (db *Database) InitializePostgress() *Database {
 	dsn := "host=localhost user=postgres password=postgres dbname=go_micro port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	DB, err := gorm.Open(postgres.Open(dsn), createGormConfig())
+
+	if err != nil {
+		log.Fatal("Cannot initialize database")
+	}
+
+	db.gormDB = DB
+	return db
+}
+
+func (db *Database) InitializeMySQL() *Database {
+	dsn := "root:@tcp(127.0.0.1:3306)/go_micro?charset=utf8mb4&parseTime=True&loc=Local"
+	DB, err := gorm.Open(mysql.Open(dsn), createGormConfig())
 
 	if err != nil {
 		log.Fatal("Cannot initialize database")
