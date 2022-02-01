@@ -54,7 +54,7 @@ func GetBookById(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error:", err)
 	}
 
-	bookDetails, _ := models.GetBookById(ID)
+	bookDetails := models.GetBookById(ID)
 	res, _ := json.Marshal(bookDetails)
 
 	w.Header().Set("Content-Type", "pkglocation/json")
@@ -85,21 +85,9 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error while parsing")
 	}
 
-	bookDetails, db := models.GetBookById(ID)
-	if updateBook.Name != "" {
-		bookDetails.Name = updateBook.Name
-	}
-
-	if updateBook.Author != "" {
-		bookDetails.Author = updateBook.Author
-	}
-
-	if updateBook.Publication != "" {
-		bookDetails.Publication = updateBook.Publication
-	}
-
-	db.Save(&bookDetails)
-	res, _ := json.Marshal(bookDetails)
+	bookDetails := models.GetBookById(ID)
+	book := updateBook.UpdateBook(bookDetails)
+	res, _ := json.Marshal(book)
 
 	w.Header().Set("Content-Type", "pkglocation/json")
 	w.WriteHeader(http.StatusOK)
