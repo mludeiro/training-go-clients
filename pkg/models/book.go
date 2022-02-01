@@ -42,11 +42,28 @@ func GetAllBooks() []Book {
 	return books
 }
 
-func GetBookById(Id int64) (*Book, *gorm.DB) {
+func GetBookById(Id int64) *Book {
 	var getBook Book
-	db := db.Where("ID=?", Id).Find(&getBook)
+	db.Where("ID=?", Id).Find(&getBook)
 
-	return &getBook, db
+	return &getBook
+}
+
+func (b *Book) UpdateBook(bookDetails *Book) Book {
+	if b.Name != "" {
+		bookDetails.Name = b.Name
+	}
+
+	if b.Author != "" {
+		bookDetails.Author = b.Author
+	}
+
+	if b.Publication != "" {
+		bookDetails.Publication = b.Publication
+	}
+
+	db.Save(&bookDetails)
+	return *bookDetails
 }
 
 func DeleteBook(Id int64) Book {

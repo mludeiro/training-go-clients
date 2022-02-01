@@ -14,6 +14,7 @@ import (
 var NewClient models.Client
 
 func CreateClient(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Create new client")
 	bytes, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 	if err != nil {
@@ -31,6 +32,7 @@ func CreateClient(w http.ResponseWriter, r *http.Request) {
 	b := client.CreateClient()
 	res, _ := json.Marshal(b)
 
+	fmt.Println("Client created successfully")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
@@ -54,7 +56,7 @@ func GetClientById(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error:", err)
 	}
 
-	client, _ := models.GetBookById(ID)
+	client := models.GetClientById(ID)
 	res, _ := json.Marshal(client)
 
 	w.Header().Set("Content-Type", "pkglocation/json")
@@ -85,13 +87,9 @@ func UpdateClient(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error while parsing")
 	}
 
-	clientDetails, db := models.GetBookById(ID)
-	if updateClient.Name != "" {
-		clientDetails.Name = updateClient.Name
-	}
-
-	db.Save(&clientDetails)
-	res, _ := json.Marshal(clientDetails)
+	clientDetails := models.GetClientById(ID)
+	client := updateClient.UpdateClient(clientDetails)
+	res, _ := json.Marshal(client)
 
 	w.Header().Set("Content-Type", "pkglocation/json")
 	w.WriteHeader(http.StatusOK)

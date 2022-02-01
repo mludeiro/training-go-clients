@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+
 	"github.com/jinzhu/gorm"
 	"github.com/pluralsight/webservice/pkg/config"
 )
@@ -9,9 +11,8 @@ var db2 *gorm.DB
 
 type Client struct {
 	gorm.Model
-	ID      uint   `gorm:"primarykey"`
-	Name    string `gorm:"not null"`
-	HasDebt bool   `gorm:"-"`
+	Name    string `gorm:""json:"name"`
+	HasDebt bool   `json:"hasDebt"`
 }
 
 func init() {
@@ -21,9 +22,10 @@ func init() {
 }
 
 func (c *Client) CreateClient() *Client {
+	fmt.Println("Client insert")
 	db.NewRecord(c)
 	db.Create(&c)
-
+	fmt.Println("Client inserted successfully")
 	return c
 }
 
@@ -34,11 +36,22 @@ func GetAllClients() []Client {
 	return clients
 }
 
-func GetClientById(Id int64) (*Client, *gorm.DB) {
+func GetClientById(Id int64) *Client {
 	var client Client
-	db := db.Where("ID=?", Id).Find(&client)
+	db.Where("ID=?", Id).Find(&client)
 
-	return &client, db
+	return &client
+}
+
+func (c *Client) UpdateClient(clientDetails *Client) Client {
+	if c.Name != "" {
+		clientDetails.Name = c.Name
+	}
+
+	clientDetails.HasDebt = c.HasDebt
+
+	db.Save(&clientDetails)
+	return *clientDetails
 }
 
 func DeleteClient(Id int64) Client {
