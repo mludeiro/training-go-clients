@@ -5,7 +5,7 @@ import (
 	"github.com/pluralsight/webservice/pkg/config"
 )
 
-var db2 *gorm.DB
+var db *gorm.DB
 
 type Client struct {
 	gorm.Model
