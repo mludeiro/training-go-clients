@@ -1,8 +1,6 @@
 package models
 
 import (
-	"fmt"
-
 	"github.com/jinzhu/gorm"
 	"github.com/pluralsight/webservice/pkg/config"
 )
@@ -22,10 +20,8 @@ func init() {
 }
 
 func (c *Client) CreateClient() *Client {
-	fmt.Println("Client insert")
 	db.NewRecord(c)
 	db.Create(&c)
-	fmt.Println("Client inserted successfully")
 	return c
 }
 

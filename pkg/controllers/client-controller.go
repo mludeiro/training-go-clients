@@ -14,7 +14,6 @@ import (
 var NewClient models.Client
 
 func CreateClient(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Create new client")
 	bytes, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 	if err != nil {
@@ -32,7 +31,6 @@ func CreateClient(w http.ResponseWriter, r *http.Request) {
 	b := client.CreateClient()
 	res, _ := json.Marshal(b)
 
-	fmt.Println("Client created successfully")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }

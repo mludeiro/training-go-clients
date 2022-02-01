@@ -20,7 +20,6 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-	routes.RegisterBookStoreRoutes(r)
 	routes.RegisterClientsRoutes(r)
 
 	http.Handle("/", r)
