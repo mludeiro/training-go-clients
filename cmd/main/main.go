@@ -23,6 +23,6 @@ func main() {
 	routes.RegisterClientsRoutes(r)
 
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe("localhost:9010", r))
+	log.Fatal(http.ListenAndServe("localhost:5000", r))
 	fmt.Println("Running")
 }
